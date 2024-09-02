@@ -1,0 +1,9 @@
+class HttpError extends Error{
+  constructor(message?: string){
+    super(message);
+    this.name = this.constructor.name;
+  }
+}
+
+export class UnauthorizedError extends HttpError{}//401
+export class ConflictError extends HttpError{}//409
