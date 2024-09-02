@@ -58,11 +58,11 @@ export async function login(credentials:LoginCredentials): Promise<User>{
 } 
 
 export async function logout(){
-  await fetchData("/api/users/logout",{method:"POST"});
+  await fetchData("https://notesapp-api-q7x8.onrender.com/api/users/logout",{method:"POST"});
 } 
 
 export async function fetchNotes(): Promise<Note[]>{
-  const response = await fetchData("/api/notes", {
+  const response = await fetchData("https://notesapp-api-q7x8.onrender.com/api/notes", {
     method: "GET",
   });
   return response.json();
@@ -85,7 +85,7 @@ export async function createNote(note: NoteInput): Promise<Note>{
 };
 
 export async function deleteNote(noteId:string){
-  await fetchData("/api/notes/"+noteId, {method:"DELETE"});
+  await fetchData("https://notesapp-api-q7x8.onrender.com/api/notes/"+noteId, {method:"DELETE"});
 }
 
 export async function updateNote(noteId:string, note:NoteInput):Promise<Note>{
