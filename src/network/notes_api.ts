@@ -20,7 +20,11 @@ async function fetchData(input: RequestInfo, init?:RequestInit){
 }
 
 export async function getLoggedInUser(): Promise<User>{
-  const response = await fetchData("https://notesapp-api-q7x8.onrender.com/api/users",{method:"GET"});
+  const response = await fetchData("https://notesapp-api-q7x8.onrender.com/api/users",{method:"GET",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',});
   return response.json();
 }
 
@@ -36,6 +40,7 @@ export async function signUp(credentials: SignUpCredentials): Promise<User>{
     headers:{
       "Content-Type":"application/json",
     },
+    credentials: 'include',
     body:JSON.stringify(credentials),
   });
   return response.json();
@@ -52,18 +57,26 @@ export async function login(credentials:LoginCredentials): Promise<User>{
     headers:{
       "Content-Type":"application/json",
     },
+    credentials: 'include',
     body:JSON.stringify(credentials),
   });
   return response.json();
 } 
 
 export async function logout(){
-  await fetchData("https://notesapp-api-q7x8.onrender.com/api/users/logout",{method:"POST"});
+  await fetchData("https://notesapp-api-q7x8.onrender.com/api/users/logout",{method:"POST",headers:{
+    "Content-Type":"application/json",
+  },
+  credentials: 'include',});
 } 
 
 export async function fetchNotes(): Promise<Note[]>{
   const response = await fetchData("https://notesapp-api-q7x8.onrender.com/api/notes", {
     method: "GET",
+    headers:{
+      "Content-Type":"application/json",
+    },
+    credentials: 'include',
   });
   return response.json();
 } 
@@ -79,13 +92,17 @@ export async function createNote(note: NoteInput): Promise<Note>{
     headers:{
       "Content-Type":"application/json",
     },
+    credentials: 'include',
     body: JSON.stringify(note),
   });
   return response.json();
 };
 
 export async function deleteNote(noteId:string){
-  await fetchData("https://notesapp-api-q7x8.onrender.com/api/notes/"+noteId, {method:"DELETE"});
+  await fetchData("https://notesapp-api-q7x8.onrender.com/api/notes/"+noteId, {method:"DELETE",  headers:{
+    "Content-Type":"application/json",
+  },
+  credentials: 'include',});
 }
 
 export async function updateNote(noteId:string, note:NoteInput):Promise<Note>{
@@ -94,6 +111,7 @@ export async function updateNote(noteId:string, note:NoteInput):Promise<Note>{
     headers:{
       "Content-Type":"application/json",
     },
+    credentials: 'include',
     body:JSON.stringify(note),
   })
   return response.json();
